@@ -24,7 +24,7 @@ module.exports = {
           DEFAULT: "#A834A5",
           light: "#E88FE5",
         },
-        emlAVENDER: {
+        emlavender: {
           dark: "#8C52FF",
           DEFAULT: "#9D74EE",
           light: "#BC9AFF",

@@ -1,6 +1,64 @@
 <header class="flex justify-between items-center px-6 py-3 bg-emDark">
   <div class="flex relative ">
-   <a href=""></a>
+    <a href={~p"/"}>
+      <img src="/images/gist-logo.svg" alt="logo" class="h-8 w-auto" />
+    </a>
+    <a href={~p"/"} class="mr-6">
+      <div class="text-white font-brand font-bold text-3xl">Gist</div>
+    </a>
+    <div>
+      <input
+        type="text"
+        class="rounded-lg focus:outline-none focus:border-emlavender focus:ring-0 px-3 py-1 bg-emDark-dark placeholder-emDark-light text-white font-brand font-regular text-sm mr-5 border-white"
+        placeholder="Search ..."
+      />
+      <button class="mt-2 mr-2 text-white text-[1rem] font-brand font-bold hover:text-emDark-light">
+        All gists
+      </button>
+    </div>
   </div>
- 
+  <div class="relative">
+    <button type="button" id="user-menu-button" class="">
+      <img
+        src="/images/user-image.svg"
+        alt="profile-photo"
+        class="round-image-padding w-8 h-8 inline"
+      />
+      <span class=" ml-1 h-0 w-0 border-x-4 border-x-transparent border-t-[5px] border-b-white">
+      </span>
+    </button>
+    <div
+      class="absolute right-0 mt-2 py-2 w-48 bg-emDark rounded-lg shadow-xl border border-white"
+      id="dropdown_menu"
+    >
+      <%= if @current_user do %>
+        Sign out
+      <% else %>
+        <.link
+          href={~p"/users/log_in"}
+          class="menu-item border-b border-white border-opacity-50"
+          role="menuitem"
+          tabindex="-1"
+          method="get"
+          id="user-menu-item-0"
+        >
+          SignIn
+        </.link>
+        <.link
+          href={~p"/users/register"}
+          class="menu-item"
+          role="menuitem"
+          tabindex="-1"
+          method="get"
+          id="user-menu-item-1"
+        >
+          Register
+        </.link>
+      <% end %>
+    </div>
+  </div>
 </header>
+<main>
+  <.flash_group flash={@flash} />
+  {@inner_content}
+</main>
