@@ -18,7 +18,12 @@
     </div>
   </div>
   <div class="relative">
-    <button type="button" id="user-menu-button" class="">
+    <button
+      type="button"
+      id="user-menu-button"
+      class=""
+      phx-click={ElixirGistWeb.Layouts.App.toggle_dropdown_menu()}
+    >
       <img
         src="/images/user-image.svg"
         alt="profile-photo"
@@ -28,11 +33,42 @@
       </span>
     </button>
     <div
-      class="absolute right-0 mt-2 py-2 w-48 bg-emDark rounded-lg shadow-xl border border-white"
+      class="img-down-arrow absolute right-0 mt-2 py-2 w-48 bg-emDark rounded-lg shadow-xl border border-white"
       id="dropdown_menu"
+      hidden="true"
+      phx-click-away={ElixirGistWeb.Layouts.App.toggle_dropdown_menu()}
     >
       <%= if @current_user do %>
-        Sign out
+        <.link
+          href={~p"/users/settings"}
+          class="menu-item border-b border-white border-opacity-50"
+          role="menuitem"
+          tabindex="-1"
+          method="get"
+          id="user-menu-item-1"
+        >
+          Signed In as {@current_user.email}
+        </.link>
+        <.link
+          href="#"
+          class="menu-item border-b border-white border-opacity-50"
+          role="menuitem"
+          tabindex="-1"
+          method="get"
+          id="user-menu-item-2"
+        >
+          Saved Gists
+        </.link>
+        <.link
+          href={~p"/users/log_out"}
+          class="menu-item border-b border-white border-opacity-50"
+          role="menuitem"
+          tabindex="-1"
+          method="delete"
+          id="user-menu-item-3"
+        >
+          Sign Out
+        </.link>
       <% else %>
         <.link
           href={~p"/users/log_in"}
@@ -40,7 +76,7 @@
           role="menuitem"
           tabindex="-1"
           method="get"
-          id="user-menu-item-0"
+          id="user-menu-item-2"
         >
           SignIn
         </.link>
@@ -50,7 +86,7 @@
           role="menuitem"
           tabindex="-1"
           method="get"
-          id="user-menu-item-1"
+          id="user-menu-item-3"
         >
           Register
         </.link>
